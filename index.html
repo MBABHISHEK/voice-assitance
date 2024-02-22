@@ -38,6 +38,9 @@
 
     <!-- Button to speak current day, date, and time -->
     <button onclick="speakCurrentDateTime()">Speak Current Date & Time</button>
+    
+    <!-- Button to speak greeting -->
+    <button onclick="speakGreeting()">Speak Greeting</button>
   </div>
 
   <!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
@@ -68,6 +71,18 @@
       const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
 
       speakDateTime(day, date, time);
+    }
+
+    // Function to speak the greeting message
+    function speakGreeting() {
+      const greeting = document.getElementById('greeting').textContent;
+      const utterance = new SpeechSynthesisUtterance(greeting);
+      utterance.lang = "en-US";
+      utterance.volume = 1;
+      utterance.rate = 1;
+      utterance.pitch = 1;
+
+      window.speechSynthesis.speak(utterance);
     }
 
     function speakDateTime(day, date, time) {
