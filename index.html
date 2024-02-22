@@ -35,6 +35,9 @@
     <div id="news">
       <!-- JavaScript will update this section -->
     </div>
+
+    <!-- Audio player -->
+    <audio id="weatherAudio" controls style="display: none;"></audio>
   </div>
 
   <!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
@@ -61,6 +64,21 @@
       .then(data => {
         const weather = data.weather[0].description;
         document.getElementById('weather').textContent = "Weather Status: " + weather;
+
+        // Convert weather information to speech and play audio
+        const speech = new SpeechSynthesisUtterance("The weather status is " + weather);
+        speech.lang = "en-US";
+        speech.volume = 1;
+        speech.rate = 1;
+        speech.pitch = 1;
+        window.speechSynthesis.speak(speech);
+
+        // Optional: Save weather information as audio file and allow user to play it
+        const audioPlayer = document.getElementById('weatherAudio');
+        const utterance = new SpeechSynthesisUtterance("The weather status is " + weather);
+        utterance.lang = "en-US";
+        const blob = new Blob([new XMLSerializer().serializeToString(utterance)], { type: 'application/ssml+xml' });
+        audioPlayer.src = URL.createObjectURL(blob);
       })
       .catch(error => {
         console.error('Error fetching weather data:', error);
