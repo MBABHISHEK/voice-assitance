@@ -36,8 +36,8 @@
       <!-- JavaScript will update this section -->
     </div>
 
-    <!-- Audio player -->
-    <audio id="weatherAudio" controls style="display: none;"></audio>
+    <!-- Button to speak current day, date, and time -->
+    <button onclick="speakCurrentDateTime()">Speak Current Date & Time</button>
   </div>
 
   <!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
@@ -50,56 +50,38 @@
     function updateDateTime() {
       const now = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-      document.getElementById('day').textContent = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
-      document.getElementById('date').textContent = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
-      document.getElementById('time').textContent = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+      const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
+      const date = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
+      const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+
+      document.getElementById('day').textContent = day;
+      document.getElementById('date').textContent = date;
+      document.getElementById('time').textContent = time;
     }
+
+    // Function to speak the current day, date, and time
+    function speakCurrentDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+      const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
+      const date = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
+      const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+
+      speakDateTime(day, date, time);
+    }
+
+    function speakDateTime(day, date, time) {
+      const utterance = new SpeechSynthesisUtterance(`${day}, ${date}, ${time}`);
+      utterance.lang = "en-US";
+      utterance.volume = 1;
+      utterance.rate = 1;
+      utterance.pitch = 1;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
     updateDateTime();
     setInterval(updateDateTime, 1000); // Update time every second
-
-    // JavaScript to fetch and display weather status
-    // Replace 'your-api-key' with your actual API key
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=your-city&appid=your-api-key')
-      .then(response => response.json())
-      .then(data => {
-        const weather = data.weather[0].description;
-        document.getElementById('weather').textContent = "Weather Status: " + weather;
-
-        // Convert weather information to speech and play audio
-        const speech = new SpeechSynthesisUtterance("The weather status is " + weather);
-        speech.lang = "en-US";
-        speech.volume = 1;
-        speech.rate = 1;
-        speech.pitch = 1;
-        window.speechSynthesis.speak(speech);
-
-        // Optional: Save weather information as audio file and allow user to play it
-        const audioPlayer = document.getElementById('weatherAudio');
-        const utterance = new SpeechSynthesisUtterance("The weather status is " + weather);
-        utterance.lang = "en-US";
-        const blob = new Blob([new XMLSerializer().serializeToString(utterance)], { type: 'application/ssml+xml' });
-        audioPlayer.src = URL.createObjectURL(blob);
-      })
-      .catch(error => {
-        console.error('Error fetching weather data:', error);
-      });
-
-    // JavaScript to fetch and display news headlines
-    // Replace 'your-api-key' with your actual API key
-    fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=your-api-key')
-      .then(response => response.json())
-      .then(data => {
-        const headlines = data.articles.map(article => article.title);
-        const newsList = document.getElementById('news');
-        headlines.forEach(headline => {
-          const listItem = document.createElement('p');
-          listItem.textContent = headline;
-          newsList.appendChild(listItem);
-        });
-      })
-      .catch(error => {
-        console.error('Error fetching news data:', error);
-      });
   </script>
 </body>
 </html>
