@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Website</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<style>
+  /* Centered div */
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+    background-color: #f0f0f0; /* Light gray background color */
+  }
+
+  /* Container style */
+  .container {
+    text-align: center;
+  }
+
+  /* Heading style */
+  h1 {
+    color: #333; /* Dark gray heading color */
+    font-size: 3em; /* Larger font size */
+    margin-bottom: 30px; /* Add some spacing below the heading */
+  }
+
+  /* Button style */
+  button {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding to the button */
+    font-size: 1.2em; /* Larger font size */
+    cursor: pointer; /* Add cursor pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+  }
+
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+</style>
+</head>
+<body>
+<div class="centered">
+  <div class="container">
+    <!-- Greeting message with morning activities -->
+    <h1>Good Morning!</h1>
+    <div id="speakMorning"></div>
+    <button onclick="speakMorning()">Speak Morning</button>
+    <div id="greeting">
+      <button onclick="speakGreeting()">Speak Greeting</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+  // Function to speak the morning activities
+  function speakMorning() {
+    const greeting = "Good Morning! Get-up, Have Brush, Take a Shower";
+    speakText(greeting);
+  }
+
+  // Function to speak the greeting message
+  function speakGreeting() {
+    const greeting = "Comb Hair, Well Dressed, Have Breakfast";
+    speakText(greeting);
+  }
+
+  // Function to speak text
+  function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.volume = 1;
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+  }
+</script>
+</body>
+</html>
