@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* Add your custom CSS styles here */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Greeting message with morning activities -->
+    <div id="greeting">
+      <h1>Good Morning!</h1>
+      <p>Get-up, Have Brush, Take a Shower, Comb Hair, Well Dressed, Have Breakfast</p>
+    </div>
+
+    <!-- Display current day, date, and time -->
+    <div id="datetime">
+      <p id="day"></p>
+      <p id="date"></p>
+      <p id="time"></p>
+    </div>
+
+    <!-- Weather status -->
+    <div id="weather">
+      <!-- JavaScript will update this section -->
+    </div>
+
+    <!-- News headlines -->
+    <div id="news">
+      <!-- JavaScript will update this section -->
+    </div>
+
+    <!-- Button to speak current day, date, and time -->
+    <button onclick="speakCurrentDateTime()">Speak Current Date & Time</button>
+    
+    <!-- Button to speak greeting -->
+    <button onclick="speakGreeting()">Speak Greeting</button>
+  </div>
+
+  <!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Custom JavaScript -->
+  <script>
+    // JavaScript to display current day, date, and time
+    function updateDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+      const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
+      const date = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
+      const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+
+      document.getElementById('day').textContent = day;
+      document.getElementById('date').textContent = date;
+      document.getElementById('time').textContent = time;
+    }
+
+    // Function to speak the current day, date, and time
+    function speakCurrentDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+      const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
+      const date = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
+      const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+
+      speakDateTime(day, date, time);
+    }
+
+    // Function to speak the greeting message
+    function speakGreeting() {
+      const greeting = document.getElementById('greeting').textContent;
+      const utterance = new SpeechSynthesisUtterance(greeting);
+      utterance.lang = "en-US";
+      utterance.volume = 1;
+      utterance.rate = 1;
+      utterance.pitch = 1;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakDateTime(day, date, time) {
+      const utterance = new SpeechSynthesisUtterance(`${day}, ${date}, ${time}`);
+      utterance.lang = "en-US";
+      utterance.volume = 1;
+      utterance.rate = 1;
+      utterance.pitch = 1;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000); // Update time every second
+  </script>
+</body>
+</html>
