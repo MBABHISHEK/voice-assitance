@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Website</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<style>
+  /* Centered div */
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+    background-color: #f0f0f0; /* Light gray background color */
+  }
+
+  /* Container style */
+  .container {
+    text-align: center;
+  }
+
+  /* Heading style */
+  h1 {
+    color: #333; /* Dark gray heading color */
+    font-size: 3em; /* Larger font size */
+    margin-bottom: 30px; /* Add some spacing below the heading */
+  }
+
+  /* Button style */
+  .btn-custom {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none; /* Remove button border */
+    padding: 10px 20px; /* Add padding to the button */
+    font-size: 1.2em; /* Larger font size */
+    cursor: pointer; /* Add cursor pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    margin: 10px; /* Add margin to buttons */
+  }
+
+  .btn-custom:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+</style>
+</head>
+<body>
+<div class="centered">
+  <div class="container">
+    <!-- Greeting message with morning activities -->
+    <div id="greeting">
+      <h1>Calender!</h1>
+      <div id="temperature"></div>
+      <button class="btn-custom" onclick="speakCurrentDay()">What day is it Today?</button>
+      <button class="btn-custom" onclick="speakTodaysDate()">Today's Date</button>
+      <button class="btn-custom" onclick="speakCurrentTime()">Current Time</button>
+      <button class="btn-custom" onclick="fetchAndSpeakWeather()">Today's Weather</button>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+  // Function to fetch and display temperature based on user's location
+  function fetchTemperature() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async position => {
+        const { latitude, longitude } = position.coords;
+
+        // Use latitude and longitude to fetch weather data from a weather API
+        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=a8c1d2697dd49736798e025886e20064`;
+
+        try {
+          const response = await fetch(weatherApiUrl);
+          const data = await response.json();
+          const temperature = data.main.temp;
+          document.getElementById('temperature').textContent = `Current Temperature: ${temperature}°C`;
+        } catch (error) {
+          console.error('Error fetching weather data:', error);
+          document.getElementById('temperature').textContent = 'Failed to fetch temperature';
+        }
+      }, error => {
+        console.error('Error getting location:', error);
+        document.getElementById('temperature').textContent = 'Failed to get location';
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      document.getElementById('temperature').textContent = 'Geolocation is not supported';
+    }
+  }
+
+  // Call the fetchTemperature function when the page loads
+  fetchTemperature();
+
+  // Function to speak the current day
+  function speakCurrentDay() {
+    const now = new Date();
+    const options = { weekday: 'long' };
+    const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
+    speakText(day);
+  }
+
+  // Function to speak today's date
+  function speakTodaysDate() {
+    const now = new Date();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const date = "Today's date is " + new Intl.DateTimeFormat('en-US', options).format(now);
+    speakText(date);
+  }
+
+  // Function to speak the current time
+  function speakCurrentTime() {
+    const now = new Date();
+    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
+    const time = "The current time is " + new Intl.DateTimeFormat('en-US', options).format(now);
+    speakText(time);
+  }
+
+  // Function to fetch and speak today's weather
+  async function fetchAndSpeakWeather() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(async position => {
+        const { latitude, longitude } = position.coords;
+
+        // Use latitude and longitude to fetch weather data from a weather API
+        const weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=a8c1d2697dd49736798e025886e20064`;
+
+        try {
+          const response = await fetch(weatherApiUrl);
+          const data = await response.json();
+          const temperature = data.main.temp;
+          const description = data.weather[0].description;
+          const weather = `The current weather is ${description} with a temperature of ${temperature} degrees Celsius.`;
+          speakText(weather);
+        } catch (error) {
+          console.error('Error fetching weather data:', error);
+          speakText('Failed to fetch weather data.');
+        }
+      }, error => {
+        console.error('Error getting location:', error);
+        speakText('Failed to get location.');
+      });
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+      speakText('Geolocation is not supported.');
+    }
+  }
+
+  // Function to speak text using SpeechSynthesis API
+  function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-US";
+    utterance.volume = 1;
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
+  }
+</script>
+</body>
+</html>
