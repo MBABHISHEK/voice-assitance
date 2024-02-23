@@ -1,86 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard with Card Design</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-vk5WoKIaFt2/wVv+SRx/x4Jc5sAO7sQ0l9aFj2H4OlzLbFqUnxswW2ta/7/0KwQQ" crossorigin="anonymous">
-<style>
-  .square-box {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 25px;
-    background-color: #d71111;
-    overflow: hidden;
-  }
-
-  .skewed-div {
-    position: absolute;
-    bottom: -50px; /* Adjusted to move the divs outside the square box */
-    width: 200%; /* Match the width of the square box */
-    height: 100px;
-    background-color: #3a9510;
-    transform-origin: top left; /* Set the origin to the top left corner for skewing */
-    transition: transform 0.5s ease-in-out; /* Added transition for smooth animation */
-  }
-
-  .square-box:hover .skewed-div:nth-child(1) {
-    transform: skewX(-30deg) translateX(-50%); /* Skew and move to the left on hover */
-  }
-
-  .square-box:hover .skewed-div:nth-child(2) {
-    transform: skewX(30deg) translateX(50%); /* Skew and move to the right on hover */
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #b3d0ff; /* Set the background color of the body */
+    }
+    .navbar {
+      background-color: #343a40; /* Dark color for the navbar */
+      border-radius: 0; /* Add border-radius to navbar corners */
+      width: 100%; /* Cover the entire screen width */
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color: #ffffff; /* White text color */
+    }
+    .navbar-brand:hover, .navbar-nav .nav-link:hover {
+      color: #adb5bd; /* Lighter text color on hover */
+    }
+    .navbar-collapse {
+      justify-content: center; /* Center align the navbar items */
+    }
+    .navbar-nav {
+      width: 100%; /* Full width for the navbar */
+    }
+    .dashboard-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .section-header {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      margin: 10px;
+      padding-left: 20px; /* Increase left padding to accommodate the triangle */
+      position: relative; /* Needed for positioning the triangle */
+      width: 120px;
+      height: 120px;
+      border: 1px solid #000;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.3s ease; /* Adding animation to the cards */
+    }
+    .card:hover {
+      transform: scale(1.1); /* Scaling up the card on hover */
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 10px 0 10px 10px;
+      border-color: transparent transparent transparent #000; /* Adjust color as needed */
+    }
+    .food { background-color: #ffdb58; }
+    .alphabet { background-color: #add8e6; }
+    .color { background-color: #ffa07a; }
+    .number { background-color: #98fb98; }
+  </style>
 </head>
 <body>
+  <!-- Bootstrap Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-lg-4">
-      <div class="square-box">
-        <div class="skewed-div"></div>
-        <div class="skewed-div"></div>
-        <div class="card-body">
-          <h5 class="card-title">What day is it Today?</h5>
-          <a href="#" class="btn btn-primary">Speak</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="square-box">
-        <div class="skewed-div"></div>
-        <div class="skewed-div"></div>
-        <div class="card-body">
-          <h5 class="card-title">Today's Date</h5>
-          <a href="#" class="btn btn-primary">Speak</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="square-box">
-        <div class="skewed-div"></div>
-        <div class="skewed-div"></div>
-        <div class="card-body">
-          <h5 class="card-title">Current Time</h5>
-          <a href="#" class="btn btn-primary">Speak</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-4">
-      <div class="square-box">
-        <div class="skewed-div"></div>
-        <div class="skewed-div"></div>
-        <div class="card-body">
-          <h5 class="card-title">Today's Weather</h5>
-          <a href="#" class="btn btn-primary">Speak</a>
-        </div>
-      </div>
+  <div class="dashboard-section">
+    <div class="section-header">Alternative Communication</div>
+    <div class="card-container">
+      <a href="morning.html" class="card food"><H6>Morning</H6></a>
+      <a href="healthcare.html" class="card alphabet"><h6>Health Care</h6></a>
+      <a href="covid.html" class="card color"><h6>Covid</h6></a>
+      <a href="covidterms.html" class="card number"><h6>Covid Terms</h6></a>
+      <a href="category.html" class="card food"><h6>Category</h6></a>
+      <a href="general.html" class="card alphabet"><h6>General</h6></a>
+      <a href="dailyhygiene.html" class="card color"><h6>DailyHygiene</h6></a>
+      <a href="food.html" class="card number"><h6>Food</h6></a>
+      <a href="letter.html" class="card food"><h6>Letter</h6></a>
+      <a href="number.html" class="card alphabet"><h6>Numbers</h6></a>
+      <a href="colors.html" class="card color"><h6>Colors</h6></a>
+      <a href="demo.html" class="card number"><h6>Demo<</h6></a>
+      <!-- Add more food items as needed -->
     </div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-d7VqCf3q2lgxvz5b+t5iwuZKtC6/ULuRsV+IKUy+B7XQK6Nj2f0CjPJoAdIim5R0" crossorigin="anonymous"></script>
+  <!-- Bootstrap JavaScript (optional, for certain components) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
