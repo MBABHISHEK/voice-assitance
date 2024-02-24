@@ -1,102 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <!-- Custom CSS -->
-  <style>
-    /* Add your custom CSS styles here */
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Website</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<style>
+  /* Centered div */
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+    background-color: #f0f0f0; /* Light gray background color */
+  }
+
+  /* Container style */
+  .container {
+    text-align: center;
+  }
+
+  /* Heading style */
+  h1 {
+    color: #333; /* Dark gray heading color */
+    font-size: 3em; /* Larger font size */
+    margin-bottom: 30px; /* Add some spacing below the heading */
+  }
+
+  /* Button style */
+  button {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none; /* Remove button border */
+    padding: 15px 30px; /* Add padding to the button */
+    font-size: 1.2em; /* Larger font size */
+    cursor: pointer; /* Add cursor pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    margin: 15px;
+  }
+
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+</style>
 </head>
 <body>
+<div class="centered">
   <div class="container">
     <!-- Greeting message with morning activities -->
+    <h1>Good Morning!</h1>
+    <select id="languageSelect" class="btn-custom">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
+        <option value="ta">Tamil</option>
+        <option value="es">Spanish</option>
+        <option value="ar">Arabic</option>
+        <option value="fr">French</option>
+    </select>
+    <div id="speakMorning"></div>
+    <button onclick="speakMorning()">Speak Morning</button>
     <div id="greeting">
-      <h1>Good Morning!</h1>
-      <p>Get-up, Have Brush, Take a Shower, Comb Hair, Well Dressed, Have Breakfast</p>
+      <button onclick="speakGreeting()">Speak Greeting</button>
     </div>
-
-    <!-- Display current day, date, and time -->
-    <div id="datetime">
-      <p id="day"></p>
-      <p id="date"></p>
-      <p id="time"></p>
-    </div>
-
-    <!-- Weather status -->
-    <div id="weather">
-      <!-- JavaScript will update this section -->
-    </div>
-
-    <!-- News headlines -->
-    <div id="news">
-      <!-- JavaScript will update this section -->
-    </div>
-
-    <!-- Button to speak current day, date, and time -->
-    <button onclick="speakCurrentDateTime()">Speak Current Date & Time</button>
-    
-    <!-- Button to speak greeting -->
-    <button onclick="speakGreeting()">Speak Greeting</button>
   </div>
+</div>
 
-  <!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Custom JavaScript -->
-  <script>
-    // JavaScript to display current day, date, and time
-    function updateDateTime() {
-      const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-      const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
-      const date = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
-      const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+<!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+  // Function to speak the morning activities
+  function speakMorning() {
+    const greetings = {
+      'en': "Good Morning! Get-up, Have Brush, Take a Shower",
+      'hi': "सुप्रभात! उठिए, ब्रश करें, शावर लें",
+      'kn': "ಶುಭೋದಯ! ಎದ್ದು ಕುಳಿತು, ಬ್ರಶ್ ಮಾಡಿ, ಶಾವರ್ ತೆಗೆಯಿರಿ",
+      'ta': "காலை வணக்கம்! எழுந்து குளிக்கவும், பிரஷ் செய்யவும், குளியல் எடுக்கவும்",
+      'es': "¡Buenos días! Levántate, cepíllate, toma una ducha",
+      'ar': "صباح الخير! استيقظ، افرش، خذ دشًا",
+      'fr': "Bonjour! Lève-toi, brosse-toi, prends une douche"
+      // Add more translations for other languages as needed
+    };
 
-      document.getElementById('day').textContent = day;
-      document.getElementById('date').textContent = date;
-      document.getElementById('time').textContent = time;
-    }
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = greetings[languageCode] || "Translation not available";
 
-    // Function to speak the current day, date, and time
-    function speakCurrentDateTime() {
-      const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
-      const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
-      const date = "Date: " + new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(now);
-      const time = "Current Time: " + new Intl.DateTimeFormat('en-US', { timeStyle: 'medium' }).format(now);
+    // Call the speakText function to speak the generated message
+    speakText(message);
+  }
 
-      speakDateTime(day, date, time);
-    }
+  // Function to speak the greeting message
+  function speakGreeting() {
+    const greetings = {
+      'en': "Comb Hair, Well Dressed, Have Breakfast",
+      'hi': "बाल बनाएं, अच्छे वस्त्र पहनें, नाश्ता करें",
+      'kn': "ಮೂಲೆ ಮಾಡಿ, ಚೆನ್ನಾಗಿ ಹೊಣೆಗಾರಿಕೆಯಿಂದಿರಿ, ತಿಂಡಿ ತಿಂದು ಸಂತೋಷಪಡಿ",
+      'ta': "முடி கட்டுக, நல்ல உடையை அணியுங்கள், காலையில் உணவு சாப்பிடுங்கள்",
+      'es': "Peina tu cabello, vístete bien, desayuna",
+      'ar': "انتظم شعرك، ارتدي ملابس جيدة، تناول الإفطار",
+      'fr': "Coiffe-toi, habille-toi bien, prends le petit-déjeuner"
+      // Add more translations for other languages as needed
+    };
+   
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = greetings[languageCode] || "Translation not available";
 
-    // Function to speak the greeting message
-    function speakGreeting() {
-      const greeting = document.getElementById('greeting').textContent;
-      const utterance = new SpeechSynthesisUtterance(greeting);
-      utterance.lang = "en-US";
-      utterance.volume = 1;
-      utterance.rate = 1;
-      utterance.pitch = 1;
+    // Call the speakText function to speak the generated message
+    speakText(message);
+  }
 
-      window.speechSynthesis.speak(utterance);
-    }
+  // Function to speak text
+  function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = document.getElementById('languageSelect').value;
+    utterance.volume = 1;
+    utterance.rate = 1;
+    utterance.pitch = 1;
 
-    function speakDateTime(day, date, time) {
-      const utterance = new SpeechSynthesisUtterance(`${day}, ${date}, ${time}`);
-      utterance.lang = "en-US";
-      utterance.volume = 1;
-      utterance.rate = 1;
-      utterance.pitch = 1;
-
-      window.speechSynthesis.speak(utterance);
-    }
-
-    updateDateTime();
-    setInterval(updateDateTime, 1000); // Update time every second
-  </script>
+    window.speechSynthesis.speak(utterance);
+  }
+</script>
 </body>
 </html>
