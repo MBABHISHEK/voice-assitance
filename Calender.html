@@ -53,6 +53,15 @@
     <div id="greeting">
       <h1>Calender!</h1>
       <div id="temperature"></div>
+      <select id="languageSelect" class="btn-custom">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
+        <option value="ta">Tamil</option>
+        <option value="es">Spanish</option>
+        <option value="ar">Arabic</option>
+        <option value="fr">French</option>
+      </select>
       <button class="btn-custom" onclick="speakCurrentDay()">What day is it Today?</button>
       <button class="btn-custom" onclick="speakTodaysDate()">Today's Date</button>
       <button class="btn-custom" onclick="speakCurrentTime()">Current Time</button>
@@ -101,29 +110,81 @@
   // Function to speak the current day
   function speakCurrentDay() {
     const now = new Date();
-    const options = { weekday: 'long' };
-    const day = "Today is " + new Intl.DateTimeFormat('en-US', options).format(now);
-    speakText(day);
-  }
+    const languageCode = document.getElementById('languageSelect').value;
+
+    // Define the translations for different languages
+    const translations = {
+        'en': "Today is " + new Intl.DateTimeFormat('en-US', { weekday: 'long' }).format(now),
+        'hi': "आज " + new Intl.DateTimeFormat('hi-IN', { weekday: 'long' }).format(now),
+        'kn': "ಇಂದು " + new Intl.DateTimeFormat('kn-IN', { weekday: 'long' }).format(now),
+        'ta': "இன்று " + new Intl.DateTimeFormat('ta-IN', { weekday: 'long' }).format(now),
+        'es': "Hoy es " + new Intl.DateTimeFormat('es-ES', { weekday: 'long' }).format(now),
+        'ar': "اليوم هو " + new Intl.DateTimeFormat('ar-EG', { weekday: 'long' }).format(now),
+        'fr': "Aujourd'hui, c'est " + new Intl.DateTimeFormat('fr-FR', { weekday: 'long' }).format(now),
+        // Add more translations for other languages as needed
+    };
+
+    // Get the translation based on the selected language code
+    const message = translations[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
 
   // Function to speak today's date
   function speakTodaysDate() {
     const now = new Date();
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const date = "Today's date is " + new Intl.DateTimeFormat('en-US', options).format(now);
-    speakText(date);
-  }
+    const languageCode = document.getElementById('languageSelect').value;
+
+    // Define the translations for different languages
+    const translations = {
+        'en': "Today's date is " + new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        'hi': "आज की तारीख " + new Intl.DateTimeFormat('hi-IN', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        'kn': "ಇಂದಿನ ದಿನಾಂಕ " + new Intl.DateTimeFormat('kn-IN', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        'ta': "இன்று தேதி " + new Intl.DateTimeFormat('ta-IN', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        'es': "La fecha de hoy es " + new Intl.DateTimeFormat('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        'ar': "تاريخ اليوم " + new Intl.DateTimeFormat('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        'fr': "La date d'aujourd'hui est " + new Intl.DateTimeFormat('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' }).format(now),
+        // Add more translations for other languages as needed
+    };
+
+    // Get the translation based on the selected language code
+    const message = translations[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
 
   // Function to speak the current time
   function speakCurrentTime() {
     const now = new Date();
-    const options = { hour: 'numeric', minute: 'numeric', hour12: true };
-    const time = "The current time is " + new Intl.DateTimeFormat('en-US', options).format(now);
-    speakText(time);
-  }
+    const languageCode = document.getElementById('languageSelect').value;
+
+    // Define the translations for different languages
+    const translations = {
+        'en': "The current time is " + new Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        'hi': "वर्तमान समय " + new Intl.DateTimeFormat('hi-IN', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        'kn': "ಪ್ರಸ್ತುತ ಸಮಯ " + new Intl.DateTimeFormat('kn-IN', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        'ta': "தற்காலிக நேரம் " + new Intl.DateTimeFormat('ta-IN', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        'es': "La hora actual es " + new Intl.DateTimeFormat('es-ES', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        'ar': "الوقت الحالي " + new Intl.DateTimeFormat('ar-EG', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        'fr': "L'heure actuelle est " + new Intl.DateTimeFormat('fr-FR', { hour: 'numeric', minute: 'numeric', hour12: true }).format(now),
+        // Add more translations for other languages as needed
+    };
+
+    // Get the translation based on the selected language code
+    const message = translations[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
 
   // Function to fetch and speak today's weather
   async function fetchAndSpeakWeather() {
+    const languageCode = document.getElementById('languageSelect').value;
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async position => {
         const { latitude, longitude } = position.coords;
@@ -136,7 +197,18 @@
           const data = await response.json();
           const temperature = data.main.temp;
           const description = data.weather[0].description;
-          const weather = `The current weather is ${description} with a temperature of ${temperature} degrees Celsius.`;
+          const translations = {
+    'en': `The current weather is ${description} with a temperature of ${temperature} degrees Celsius.`,
+    'hi': `वर्तमान मौसम ${description} है और तापमान ${temperature} डिग्री सेल्सियस है।`,
+    'kn': `ಪ್ರಸ್ತುತ ಹವಾಮಾನ ${description} ಮತ್ತು ತಾಪಮಾನ ${temperature} ಡಿಗ್ರಿ ಸೆಲ್ಸಿಯಸ್ ಇದೆ.`,
+    'ta': `தற்போதைய வானிலை ${description} மற்றும் வெப்பநிலை ${temperature} டிகிரி செல்சியஸ் ஆகும்.`,
+    'es': `El clima actual es ${description} con una temperatura de ${temperature} grados Celsius.`,
+    'ar': `الطقس الحالي هو ${description} مع درجة حرارة تبلغ ${temperature} درجة مئوية.`,
+    'fr': `La météo actuelle est ${description} avec une température de ${temperature} degrés Celsius.`,
+    // Add more translations for other languages as needed
+};
+const weather =translations[languageCode] || "Translation not available";
+
           speakText(weather);
         } catch (error) {
           console.error('Error fetching weather data:', error);
@@ -155,7 +227,7 @@
   // Function to speak text using SpeechSynthesis API
   function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
+    utterance.lang = document.getElementById('languageSelect').value;
     utterance.volume = 1;
     utterance.rate = 1;
     utterance.pitch = 1;
