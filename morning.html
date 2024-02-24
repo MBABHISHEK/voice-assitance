@@ -34,10 +34,13 @@
     background-color: #007bff; /* Blue button color */
     color: #fff; /* White text color */
     border: none; /* Remove button border */
-    padding: 10px 20px; /* Add padding to the button */
+    padding: 15px 30px; /* Add padding to the button */
     font-size: 1.2em; /* Larger font size */
     cursor: pointer; /* Add cursor pointer on hover */
     transition: background-color 0.3s ease; /* Smooth background color transition */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    margin: 15px;
   }
 
   button:hover {
@@ -50,6 +53,15 @@
   <div class="container">
     <!-- Greeting message with morning activities -->
     <h1>Good Morning!</h1>
+    <select id="languageSelect" class="btn-custom">
+        <option value="en">English</option>
+        <option value="hi">Hindi</option>
+        <option value="kn">Kannada</option>
+        <option value="ta">Tamil</option>
+        <option value="es">Spanish</option>
+        <option value="ar">Arabic</option>
+        <option value="fr">French</option>
+    </select>
     <div id="speakMorning"></div>
     <button onclick="speakMorning()">Speak Morning</button>
     <div id="greeting">
@@ -66,20 +78,48 @@
 <script>
   // Function to speak the morning activities
   function speakMorning() {
-    const greeting = "Good Morning! Get-up, Have Brush, Take a Shower";
-    speakText(greeting);
+    const greetings = {
+      'en': "Good Morning! Get-up, Have Brush, Take a Shower",
+      'hi': "सुप्रभात! उठिए, ब्रश करें, शावर लें",
+      'kn': "ಶುಭೋದಯ! ಎದ್ದು ಕುಳಿತು, ಬ್ರಶ್ ಮಾಡಿ, ಶಾವರ್ ತೆಗೆಯಿರಿ",
+      'ta': "காலை வணக்கம்! எழுந்து குளிக்கவும், பிரஷ் செய்யவும், குளியல் எடுக்கவும்",
+      'es': "¡Buenos días! Levántate, cepíllate, toma una ducha",
+      'ar': "صباح الخير! استيقظ، افرش، خذ دشًا",
+      'fr': "Bonjour! Lève-toi, brosse-toi, prends une douche"
+      // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = greetings[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
   }
 
   // Function to speak the greeting message
   function speakGreeting() {
-    const greeting = "Comb Hair, Well Dressed, Have Breakfast";
-    speakText(greeting);
+    const greetings = {
+      'en': "Comb Hair, Well Dressed, Have Breakfast",
+      'hi': "बाल बनाएं, अच्छे वस्त्र पहनें, नाश्ता करें",
+      'kn': "ಮೂಲೆ ಮಾಡಿ, ಚೆನ್ನಾಗಿ ಹೊಣೆಗಾರಿಕೆಯಿಂದಿರಿ, ತಿಂಡಿ ತಿಂದು ಸಂತೋಷಪಡಿ",
+      'ta': "முடி கட்டுக, நல்ல உடையை அணியுங்கள், காலையில் உணவு சாப்பிடுங்கள்",
+      'es': "Peina tu cabello, vístete bien, desayuna",
+      'ar': "انتظم شعرك، ارتدي ملابس جيدة، تناول الإفطار",
+      'fr': "Coiffe-toi, habille-toi bien, prends le petit-déjeuner"
+      // Add more translations for other languages as needed
+    };
+   
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = greetings[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
   }
 
   // Function to speak text
   function speakText(text) {
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
+    utterance.lang = document.getElementById('languageSelect').value;
     utterance.volume = 1;
     utterance.rate = 1;
     utterance.pitch = 1;
