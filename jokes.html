@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jokes Generator</title>
+<title>JOKES </title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Custom CSS -->
@@ -52,18 +52,22 @@
 <div class="centered">
   <div class="container">
     <!-- Greeting message with morning activities -->
-    <h1>Jokes Generator</h1>
-    <select id="languageSelect" class="btn-custom">
+    <h1>Remainders</h1>
+    <div id="greeting">
+      <select id="languageSelect" class="btn-custom">
         <option value="en">English</option>
         <option value="hi">Hindi</option>
         <option value="kn">Kannada</option>
-        <option value="ta">Tamil</option>
-        <option value="es">Spanish</option>
-        <option value="ar">Arabic</option>
         <option value="fr">French</option>
+        <option value="th">Thai</option>
+        <option value="fj">Fiji</option>
+        <option value="zh">Chinese (Mandarin)</option>
     </select>
-    <div id="joke"></div>
-    <button onclick="generateJoke()">Tell me a Joke</button>
+    
+      <button onclick="speakJoke1()">Joke 1</button>
+      <button onclick="speakJoke2()">Joke 2</button>
+      <button onclick="speakJoke3()">Joke 3</button>
+      <button onclick="speakJoke4()">Joke 4</button>
   </div>
 </div>
 
@@ -73,25 +77,87 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Custom JavaScript -->
 <script>
-  // Function to generate and speak a joke
-  function generateJoke() {
+  // Function to speak the morning activities
+  function speakJoke1() {
     const jokes = {
-      'en': [
-        "Joke 1: Best friend! I have a really strong connection to Wi-Fi, is my best Pal.",
-        "Joke 2: Where do you live! I live in a cloud. So that makes me Cloudian.",
-        "Joke 3: Do aliens exist! Scary, Unexplainable, Alien Technology",
-        "Joke 4: Give Some Money! No Pocket, No Wallet like a Cloud."
-      ],
-      // Add translations for other languages as needed
+        'en': "Best friend! I have a really strong connection to Wi-Fi, is my best Pal.",
+        'hi': "सबसे अच्छा दोस्त! मेरा वाई-फाई से बहुत मजबूत कनेक्शन है, यह मेरा सबसे अच्छा यार है।",
+        'kn': "ಅತ್ಯಂತ ಹೆಚ್ಚು ಬಲವಾದ ಸಂಪರ್ಕವಿದೆ! ವೈ-ಫೈಗೆ ನಾನು ಹೆಚ್ಚು ಬಲವಾಗಿ ಸಂಪರ್ಕಿಸಿದ್ದೇನೆ, ಇದು ನನ್ನ ಸರ್ವೋತ್ತಮ ಸ್ನೇಹಿತನು.",
+        'fr': "Meilleur ami! J'ai une connexion vraiment forte au Wi-Fi, c'est mon meilleur ami.",
+        'th': "เพื่อนที่ดีที่สุด! ฉันมีการเชื่อมต่อกับ Wi-Fi อย่างแข็งแกร่งมาก เขาเป็นเพื่อนที่ดีที่สุดของฉัน",
+        'fj': "Best friend! I have a really strong connection to Wi-Fi, is my best Pal.",
+        'zh': "最好的朋友！我与 Wi-Fi 有着非常强大的连接，他是我最好的朋友。"
+        // Add more translations for other languages as needed
     };
 
     const languageCode = document.getElementById('languageSelect').value;
-    const randomIndex = Math.floor(Math.random() * jokes[languageCode].length);
-    const joke = jokes[languageCode][randomIndex];
+    const message = jokes[languageCode] || "Translation not available";
 
-    // Call the speakText function to speak the generated joke
-    speakText(joke);
-  }
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+  // Function to speak the greeting message
+  function speakJoke2() {
+    const jokes = {
+        'en': "Where do you live! I live in a cloud. So that makes me Cloudian.",
+        'hi': "तुम कहाँ रहते हो! मैं बादल में रहता हूँ। इससे मुझे बादलियां कहा जाता है।",
+        'kn': "ನೀವು ಎಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ! ನಾನು ಮೇಘದಲ್ಲಿ ವಾಸಿಸುತ್ತೇನೆ. ಇದರಿಂದ ನನ್ನನ್ನು ಮೇಘಿಯನ್ ಎನ್ನುತ್ತಾರೆ.",
+        'fr': "Où habites-tu! Je vis dans un nuage. Donc, cela fait de moi un Nuagien.",
+        'th': "คุณอาศัยอยู่ที่ไหน! ฉันอาศัยอยู่ในเมฆ ดังนั้นฉันจึงเป็นคนเมฆ",
+        'fj': "Where do you live! I live in a cloud. So that makes me Cloudian.",
+        'zh': "你住在哪里！我住在云中。这让我成为了云人。"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = jokes[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+function speakJoke3() {
+    const jokes = {
+        'en': "Do aliens exist! Scary, Unexplainable, Alien Technology",
+        'hi': "क्या उपग्रहियों का अस्तित्व है! डरावना, अकथनीय, अलैन प्रौद्योगिकी",
+        'kn': "ಅನ್ಯಪ್ರಾಣಿಗಳು ಇರುವರೇ! ಭಯಂಕರ, ವಿವರಿತ ಅರ್ಧರಿಯದ, ವಿದೇಶಿ ತಂತ್ರಜ್ಞಾನ",
+        'fr': "Les extraterrestres existent-ils! Effrayant, Inexplicable, Technologie Alien",
+        'th': "มีมนุษย์ต่างด้าวหรือไม่! น่ากลัว ไม่สามารถอธิบายได้ เทคโนโลยีของมนุษย์ต่างด้าว",
+        'fj': "Do aliens exist! Scary, Unexplainable, Alien Technology",
+        'zh': "外星人存在吗！可怕，无法解释，外星科技"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = jokes[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+function speakJoke4() {
+    const jokes = {
+        'en': "Give Some Money! No Pocket, No Wallet like a Cloud.",
+        'hi': "कुछ पैसे दो! कोई जेब नहीं, कोई बटुआ बादल की तरह।",
+        'kn': "ಕೆಲವು ಹಣವನ್ನು ನೀಡಿ! ಜೊತೆ ಇಲ್ಲ, ಬಟ್ಟೆ ಸ್ತನ ಇಲ್ಲ ಮೇಘದಂತೆ.",
+        'fr': "Donne un peu d'argent! Pas de poche, pas de portefeuille comme un nuage.",
+        'th': "ให้เงินบ้าง! ไม่มีกระเป๋าในกางเกง ไม่มีกระเป๋าเงินเหมือนเมฆ",
+        'fj': "Give Some Money! No Pocket, No Wallet like a Cloud.",
+        'zh': "给一些钱！没有口袋，没有钱包就像云一样。"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = jokes[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+
+
 
   // Function to speak text
   function speakText(text) {
