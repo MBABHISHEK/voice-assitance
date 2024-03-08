@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Music Tracks</title>
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Custom CSS -->
+<style>
+  /* Centered div */
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust as needed */
+    background-color: #f0f0f0; /* Light gray background color */
+  }
+
+  /* Container style */
+  .container {
+    text-align: center;
+  }
+
+  /* Heading style */
+  h1 {
+    color: #333; /* Dark gray heading color */
+    font-size: 3em; /* Larger font size */
+    margin-bottom: 30px; /* Add some spacing below the heading */
+  }
+
+  /* Button style */
+  button {
+    background-color: #007bff; /* Blue button color */
+    color: #fff; /* White text color */
+    border: none; /* Remove button border */
+    padding: 15px 30px; /* Add padding to the button */
+    font-size: 1.2em; /* Larger font size */
+    cursor: pointer; /* Add cursor pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+    margin: 15px;
+  }
+
+  button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+</style>
+</head>
+<body>
+<div class="centered">
+  <div class="container">
+    <!-- Greeting message with morning activities -->
+    <h1>Listen to Music Tracks</h1>
+    <select id="languageSelect" class="btn-custom">
+        <option value="en">English</option>
+        <option value="kn">Kannada</option>
+    </select>
+    <div id="music"></div>
+    <button onclick="playMusic()">Play Music</button>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery (needed for Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Custom JavaScript -->
+<script>
+  // Define music tracks with descriptions for different languages
+  const musicTracks = {
+    'en': [
+      { name: "Track 1: Happy Birthday", description: "Celebrate a special day with joy and happiness." },
+      { name: "Track 2: Happy New Year", description: "Welcome the new year with hope and excitement." },
+      { name: "Track 3: Merry Christmas", description: "Spread the holiday cheer and festive spirit." },
+      { name: "Track 4: Be With You", description: "Expressing love and companionship." },
+      { name: "Track 5: Titanic", description: "Relive the romantic tale of the Titanic through music." }
+    ],
+    'kn': [
+      { name: "Track 2(Kannada): Happy Ugadhi", description: "ಹೊಸ ವರ್ಷದ ಹಬ್ಬದ ಶುಭಾಶಯಗಳು." }
+      // Add more tracks and descriptions for Kannada language as needed
+    ]
+    // Add translations for other languages as needed
+  };
+
+  // Function to play music
+  function playMusic() {
+    const languageCode = document.getElementById('languageSelect').value;
+    const tracks = musicTracks[languageCode];
+    const randomIndex = Math.floor(Math.random() * tracks.length);
+    const track = tracks[randomIndex];
+
+    // Log track details to console
+    console.log(`Now playing: ${track.name}`);
+    console.log(`Description: ${track.description}`);
+
+    // For demonstration purposes, we are just logging the track details here
+    // You can implement actual music playback functionality using libraries like Howler.js or HTML5 Audio API
+  }
+</script>
+</body>
+</html>
