@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reminders/Alerts Generator</title>
+<title>Remainder</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Custom CSS -->
@@ -52,18 +52,22 @@
 <div class="centered">
   <div class="container">
     <!-- Greeting message with morning activities -->
-    <h1>Reminders/Alerts Generator</h1>
-    <select id="languageSelect" class="btn-custom">
+    <h1>Remainders</h1>
+    <div id="greeting">
+      <select id="languageSelect" class="btn-custom">
         <option value="en">English</option>
         <option value="hi">Hindi</option>
         <option value="kn">Kannada</option>
-        <option value="ta">Tamil</option>
-        <option value="es">Spanish</option>
-        <option value="ar">Arabic</option>
         <option value="fr">French</option>
+        <option value="th">Thai</option>
+        <option value="fj">Fiji</option>
+        <option value="zh">Chinese (Mandarin)</option>
     </select>
-    <div id="reminder"></div>
-    <button onclick="generateReminder()">Generate Reminder</button>
+    
+      <button onclick="speakReminder1()">Remainder 1</button>
+      <button onclick="speakReminder2()">Remainder 2</button>
+      <button onclick="speakReminder3()">Remainder</button>
+    </div>
   </div>
 </div>
 
@@ -73,24 +77,67 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Custom JavaScript -->
 <script>
-  // Function to generate and speak a reminder/alert
-  function generateReminder() {
-    const reminders = {
-      'en': [
-        "Prevent Dehydration: Drink enough Water.",
-        "Medical Dose Alert: Take Medicine on time.",
-        "Walk the Pet-Dog in the Evening."
-      ],
-      // Add translations for other languages as needed
+  // Function to speak the morning activities
+  function speakReminder1() {
+    const reminder = {
+        'en': "Prevent Dehydration: Drink enough Water",
+        'hi': "डिहाइड्रेशन से बचाव करें: पर्याप्त पानी पिएं",
+        'kn': "ಡಿಹೈಡ್ರೇಷನ್ ಅನ್ನು ತಪ್ಪಿಸಿ: ಸಾಕಷ್ಟು ನೀರು ಕುಡಿಯಿರಿ",
+        'fr': "Prévenir la déshydratation: Buvez suffisamment d'eau",
+        'th': "ป้องกันการขาดน้ำ: ดื่มน้ำเพียงพอ",
+        'fj': "Kakua ni qaravi na Dehydration: Gunu ka levu na Wai",
+        'zh': "防止脱水：喝足够的水"
+        // Add more translations for other languages as needed
     };
 
     const languageCode = document.getElementById('languageSelect').value;
-    const randomIndex = Math.floor(Math.random() * reminders[languageCode].length);
-    const reminder = reminders[languageCode][randomIndex];
+    const message = reminder[languageCode] || "Translation not available";
 
-    // Call the speakText function to speak the generated reminder
-    speakText(reminder);
-  }
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+  // Function to speak the greeting message
+  function speakReminder2() {
+    const reminders = {
+        'en': "Medical Dose Alert: Take Medicine on time",
+        'kn': "ಮದುವೆಯ ಡೋಸ್ ಅಲರ್ಟ್: ಸಮಯದಲ್ಲಿ ಔಷಧಿ ಸೇವಿಸಿ",
+        'hi': "मेडिकल डोस अलर्ट: समय पर दवा लें",
+        'fr': "Alerte de dose médicale : Prenez votre médicament à temps",
+        'th': "การแจ้งเตือนของการให้ยา: รับยาตามเวลา",
+        'fj': "Medical Dose Alert: Taura na vudi e na gauna",
+        'zh': "医疗剂量警报：按时服药"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = reminders[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+function speakReminder3() {
+    const reminders = {
+        'en': "Walk the Pet-Dog in the Evening",
+        'kn': "ಸಾಯಂಕಾಲದಲ್ಲಿ ಪ್ರಾಣಿ-ನಾಯಿಯನ್ನು ನಡೆಯಿರಿ",
+        'hi': "शाम को पालतू कुत्ते के साथ सैर करें",
+        'fr': "Promenez le chien de compagnie le soir",
+        'th': "เดินเล่นสุนัขเลี้ยงในตอนเย็น",
+        'fj': "Walk the Pet-Dog in the Evening",
+        'zh': "晚上遛狗宠物"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = reminders[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+
 
   // Function to speak text
   function speakText(text) {
