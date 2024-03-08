@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Short Communication Generator</title>
+<title>Short Communications</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Custom CSS -->
@@ -52,7 +52,8 @@
 <div class="centered">
   <div class="container">
     <!-- Greeting message with morning activities -->
-    <h1>Short Communication Generator</h1>
+    <h1>Short Communications</h1>
+    <div id="greeting">
     <select id="languageSelect" class="btn-custom">
         <option value="en">English</option>
         <option value="hi">Hindi</option>
@@ -62,8 +63,11 @@
         <option value="ar">Arabic</option>
         <option value="fr">French</option>
     </select>
-    <div id="communication"></div>
-    <button onclick="generateCommunication()">Generate Communication</button>
+      <button onclick="speakHabbit1()">Sunny Day</button>
+      <button onclick="speakHabbit2()">Kitchen</button>
+      <button onclick="speakHabbit3()">Breakfast Time</button>
+      <button onclick="speakHabbit4()">Meeting Friend</button>
+    </div>
   </div>
 </div>
 
@@ -73,25 +77,86 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Custom JavaScript -->
 <script>
-  // Function to generate and speak a short communication
-  function generateCommunication() {
-    const communications = {
-      'en': [
-        "SUN is shining today, isn’t that nice!",
-        "Time to have Breakfast, Let’s go to the Kitchen",
-        "Hot breakfast! Oatmeal and coffee.",
-        "Outing! Let’s get into the car."
-      ],
-      // Add translations for other languages as needed
+  // Function to speak the morning activities
+  function speakHabbit1() {
+    const habits = {
+        'en': "SUN is shining today, isn’t that nice!",
+        'hi': "आज सूर्य चमक रहा है, यह अच्छा नहीं है क्या!",
+        'kn': "ಇಂದು ಸೂರ್ಯ ಬೆಳಗುತ್ತಿದೆ, ಇದು ಚೆನ್ನಾಗಿದೆ ಅಲ್ಲವೆ!",
+        'ta': "இன்று சூரியன் படக்கிறது, அது அழகாக இருக்கும் என்று அல்லது அல்லது அல்லது அல்லது!",
+        'es': "¡El SOL está brillando hoy, ¿no es eso agradable!",
+        'ar': "الشمس تشرق اليوم، أليس ذلك جميلا!",
+        'fr': "Le SOLEIL brille aujourd'hui, n'est-ce pas agréable!"
+        // Add more translations for other languages as needed
     };
 
     const languageCode = document.getElementById('languageSelect').value;
-    const randomIndex = Math.floor(Math.random() * communications[languageCode].length);
-    const communication = communications[languageCode][randomIndex];
+    const message = habits[languageCode] || "Translation not available";
 
-    // Call the speakText function to speak the generated communication
-    speakText(communication);
-  }
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+  // Function to speak the greeting message
+  function speakHabbit2() {
+    const habits = {
+        'en': "Time to have Breakfast, Let’s go to the Kitchen",
+        'hi': "नाश्ता करने का समय है, चलो रसोई में चलें",
+        'kn': "ತಿಂಡಿ ತಿನ್ನುವ ಸಮಯ, ರಸೋಯಾಗೆ ಹೋಗೋಣ",
+        'ta': "காலை உணவுக்கு நேரம், சமையலறைக்கு போகலாம்",
+        'es': "Es hora de desayunar, Vamos a la cocina",
+        'ar': "حان وقت تناول الإفطار، لنذهب إلى المطبخ",
+        'fr': "Il est temps de prendre le petit-déjeuner, Allons à la cuisine"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = habits[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+function speakHabbit3() {
+    const habits = {
+        'en': "Hot breakfast! Oatmeal and coffee",
+        'hi': "गरम नाश्ता! ओटमील और कॉफी",
+        'kn': "ಬಿಸಿ ಟಿಂಗಳ ಉಪ್ಪಿಟ್ಟು! ಓಟ್ಮೀಲ್ ಮತ್ತು ಕಾಫಿ",
+        'ta': "சூடான காலை உணவு! ஓட்மீல் மற்றும் கோப்பீல்",
+        'es': "¡Desayuno caliente! Avena y café",
+        'ar': "فطور ساخن! شوفان وقهوة",
+        'fr': "Petit-déjeuner chaud! Flocons d'avoine et café"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = habits[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+
+function speakHabbit4() {
+    const habits = {
+        'en': "Outing! Let’s get into the car",
+        'hi': "बाहर जाएं! चलो कार में बैठें",
+        'kn': "ಔಟಿಂಗ್! ನಾವು ಕಾರಿನಲ್ಲಿ ಹೋಗೋಣ",
+        'ta': "சுற்றுலா! கார்க்குட்டில் நாம் செல்லலாம்",
+        'es': "¡Excursión! ¡Subamos al coche!",
+        'ar': "رحلة! دعونا ننطلق في السيارة",
+        'fr': "Sortie! Montons dans la voiture"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = habits[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
 
   // Function to speak text
   function speakText(text) {
