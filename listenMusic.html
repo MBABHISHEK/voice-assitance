@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Music Tracks</title>
+<title>Music</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Custom CSS -->
@@ -52,13 +52,22 @@
 <div class="centered">
   <div class="container">
     <!-- Greeting message with morning activities -->
-    <h1>Listen to Music Tracks</h1>
-    <select id="languageSelect" class="btn-custom">
-        <option value="en">English</option>
-        <option value="kn">Kannada</option>
-    </select>
-    <div id="music"></div>
-    <button onclick="playMusic()">Play Music</button>
+    <h1>Music</h1>
+    <div id="greeting">
+      <audio id="musicTrack1" src="D:\internship\New folder\music\track1.mp3"></audio>
+      <audio id="musicTrack2" src="track2.mp3"></audio>
+      <audio id="musicTrack3" src="track3.mp3"></audio>
+      <audio id="musicTrack4" src="track4.mp3"></audio>
+      <audio id="musicTrack5" src="track5.mp3"></audio>
+
+      <button onclick="playMusicTrack(1)">Play Track 1</button>
+      <button onclick="playMusicTrack(2)">Play Track 2</button>
+      <button onclick="playMusicTrack(3)">Play Track 3</button>
+      <button onclick="playMusicTrack(4)">Play Track 4</button>
+      <button onclick="playMusicTrack(5)">Play Track 5</button>
+
+    
+     
   </div>
 </div>
 
@@ -68,35 +77,103 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Custom JavaScript -->
 <script>
-  // Define music tracks with descriptions for different languages
-  const musicTracks = {
-    'en': [
-      { name: "Track 1: Happy Birthday", description: "Celebrate a special day with joy and happiness." },
-      { name: "Track 2: Happy New Year", description: "Welcome the new year with hope and excitement." },
-      { name: "Track 3: Merry Christmas", description: "Spread the holiday cheer and festive spirit." },
-      { name: "Track 4: Be With You", description: "Expressing love and companionship." },
-      { name: "Track 5: Titanic", description: "Relive the romantic tale of the Titanic through music." }
-    ],
-    'kn': [
-      { name: "Track 2(Kannada): Happy Ugadhi", description: "ಹೊಸ ವರ್ಷದ ಹಬ್ಬದ ಶುಭಾಶಯಗಳು." }
-      // Add more tracks and descriptions for Kannada language as needed
-    ]
-    // Add translations for other languages as needed
-  };
 
-  // Function to play music
-  function playMusic() {
+function playMusicTrack(trackNumber) {
+    const audio = document.getElementById(`musicTrack${trackNumber}`);
+    audio.play();
+}
+
+  // Function to speak the morning activities
+  function speakJoke1() {
+    const jokes = {
+        'en': "Best friend! I have a really strong connection to Wi-Fi, is my best Pal.",
+        'hi': "सबसे अच्छा दोस्त! मेरा वाई-फाई से बहुत मजबूत कनेक्शन है, यह मेरा सबसे अच्छा यार है।",
+        'kn': "ಅತ್ಯಂತ ಹೆಚ್ಚು ಬಲವಾದ ಸಂಪರ್ಕವಿದೆ! ವೈ-ಫೈಗೆ ನಾನು ಹೆಚ್ಚು ಬಲವಾಗಿ ಸಂಪರ್ಕಿಸಿದ್ದೇನೆ, ಇದು ನನ್ನ ಸರ್ವೋತ್ತಮ ಸ್ನೇಹಿತನು.",
+        'fr': "Meilleur ami! J'ai une connexion vraiment forte au Wi-Fi, c'est mon meilleur ami.",
+        'th': "เพื่อนที่ดีที่สุด! ฉันมีการเชื่อมต่อกับ Wi-Fi อย่างแข็งแกร่งมาก เขาเป็นเพื่อนที่ดีที่สุดของฉัน",
+        'fj': "Best friend! I have a really strong connection to Wi-Fi, is my best Pal.",
+        'zh': "最好的朋友！我与 Wi-Fi 有着非常强大的连接，他是我最好的朋友。"
+        // Add more translations for other languages as needed
+    };
+
     const languageCode = document.getElementById('languageSelect').value;
-    const tracks = musicTracks[languageCode];
-    const randomIndex = Math.floor(Math.random() * tracks.length);
-    const track = tracks[randomIndex];
+    const message = jokes[languageCode] || "Translation not available";
 
-    // Log track details to console
-    console.log(`Now playing: ${track.name}`);
-    console.log(`Description: ${track.description}`);
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
 
-    // For demonstration purposes, we are just logging the track details here
-    // You can implement actual music playback functionality using libraries like Howler.js or HTML5 Audio API
+
+  // Function to speak the greeting message
+  function speakJoke2() {
+    const jokes = {
+        'en': "Where do you live! I live in a cloud. So that makes me Cloudian.",
+        'hi': "तुम कहाँ रहते हो! मैं बादल में रहता हूँ। इससे मुझे बादलियां कहा जाता है।",
+        'kn': "ನೀವು ಎಲ್ಲಿ ವಾಸಿಸುತ್ತೀರಿ! ನಾನು ಮೇಘದಲ್ಲಿ ವಾಸಿಸುತ್ತೇನೆ. ಇದರಿಂದ ನನ್ನನ್ನು ಮೇಘಿಯನ್ ಎನ್ನುತ್ತಾರೆ.",
+        'fr': "Où habites-tu! Je vis dans un nuage. Donc, cela fait de moi un Nuagien.",
+        'th': "คุณอาศัยอยู่ที่ไหน! ฉันอาศัยอยู่ในเมฆ ดังนั้นฉันจึงเป็นคนเมฆ",
+        'fj': "Where do you live! I live in a cloud. So that makes me Cloudian.",
+        'zh': "你住在哪里！我住在云中。这让我成为了云人。"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = jokes[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+function speakJoke3() {
+    const jokes = {
+        'en': "Do aliens exist! Scary, Unexplainable, Alien Technology",
+        'hi': "क्या उपग्रहियों का अस्तित्व है! डरावना, अकथनीय, अलैन प्रौद्योगिकी",
+        'kn': "ಅನ್ಯಪ್ರಾಣಿಗಳು ಇರುವರೇ! ಭಯಂಕರ, ವಿವರಿತ ಅರ್ಧರಿಯದ, ವಿದೇಶಿ ತಂತ್ರಜ್ಞಾನ",
+        'fr': "Les extraterrestres existent-ils! Effrayant, Inexplicable, Technologie Alien",
+        'th': "มีมนุษย์ต่างด้าวหรือไม่! น่ากลัว ไม่สามารถอธิบายได้ เทคโนโลยีของมนุษย์ต่างด้าว",
+        'fj': "Do aliens exist! Scary, Unexplainable, Alien Technology",
+        'zh': "外星人存在吗！可怕，无法解释，外星科技"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = jokes[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+function speakJoke4() {
+    const jokes = {
+        'en': "Give Some Money! No Pocket, No Wallet like a Cloud.",
+        'hi': "कुछ पैसे दो! कोई जेब नहीं, कोई बटुआ बादल की तरह।",
+        'kn': "ಕೆಲವು ಹಣವನ್ನು ನೀಡಿ! ಜೊತೆ ಇಲ್ಲ, ಬಟ್ಟೆ ಸ್ತನ ಇಲ್ಲ ಮೇಘದಂತೆ.",
+        'fr': "Donne un peu d'argent! Pas de poche, pas de portefeuille comme un nuage.",
+        'th': "ให้เงินบ้าง! ไม่มีกระเป๋าในกางเกง ไม่มีกระเป๋าเงินเหมือนเมฆ",
+        'fj': "Give Some Money! No Pocket, No Wallet like a Cloud.",
+        'zh': "给一些钱！没有口袋，没有钱包就像云一样。"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = jokes[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+
+
+
+  // Function to speak text
+  function speakText(text) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = document.getElementById('languageSelect').value;
+    utterance.volume = 1;
+    utterance.rate = 1;
+    utterance.pitch = 1;
+
+    window.speechSynthesis.speak(utterance);
   }
 </script>
 </body>
