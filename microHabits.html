@@ -159,6 +159,7 @@ function speakHabbit4() {
 
   // Function to speak text
   function speakText(text) {
+    console.log(text);
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = document.getElementById('languageSelect').value;
     utterance.volume = 1;
