@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Activity Generator</title>
+<title>Micro Habits</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Custom CSS -->
@@ -52,7 +52,8 @@
 <div class="centered">
   <div class="container">
     <!-- Greeting message with morning activities -->
-    <h1>Activity Generator</h1>
+    <h1>Micro Habbits</h1>
+    <div id="greeting">
     <select id="languageSelect" class="btn-custom">
         <option value="en">English</option>
         <option value="hi">Hindi</option>
@@ -62,8 +63,11 @@
         <option value="ar">Arabic</option>
         <option value="fr">French</option>
     </select>
-    <div id="activityDescription"></div>
-    <button onclick="generateActivity()">Generate Activity</button>
+      <button onclick="speakHabbit1()">Habbit 1</button>
+      <button onclick="speakHabbit2()">Habbit 2</button>
+      <button onclick="speakHabbit3()">Habbit 3</button>
+      <button onclick="speakHabbit4()">Habbit 4</button>
+    </div>
   </div>
 </div>
 
@@ -73,31 +77,85 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Custom JavaScript -->
 <script>
-  // Function to generate and speak an activity
-  function generateActivity() {
-    const activities = {
-      'en': [
-        { name: "Meditate", description: "Take some time to clear your mind and relax through meditation." },
-        { name: "Relax", description: "Find a quiet and comfortable place to unwind and relieve stress." },
-        { name: "Just Breathe", description: "Practice deep breathing exercises to promote relaxation and mindfulness." },
-        { name: "Enough Sleep", description: "Ensure you get sufficient rest each night for optimal health and well-being." },
-        { name: "Exercise", description: "Engage in physical activity to strengthen your body and improve your mood." },
-        { name: "Healthy Diet", description: "Fuel your body with nutritious foods to maintain good health and vitality." },
-        { name: "Outing into the SUN!", description: "Spend some time outdoors soaking up the sun to boost your vitamin D levels." },
-        { name: "Listen to Music", description: "Enjoy your favorite tunes to uplift your mood and reduce stress." }
-      ],
-      // Add translations for other languages as needed
+  // Function to speak the morning activities
+  function speakHabbit1() {
+    const habits = {
+        'en': "Meditate, Relax, Just Breathe",
+        'hi': "ध्यान करें, आराम करें, सिर्फ सांस लो",
+        'kn': "ಧ್ಯಾನಿಸಿ, ಅವಕಾಶ ಪಡೆಯಿರಿ, ಶ್ವಾಸ ಮಾಡಿ",
+        'ta': "மெடிடேட், இறைவாடு, எண்ணிக்கையாய் உதவும்",
+        'es': "Meditar, Relájate, Solo respira",
+        'ar': "تأمل، استرخ، فقط اتنفس",
+        'fr': "Méditer, Détends-toi, Respire juste"
+        // Add more translations for other languages as needed
     };
 
     const languageCode = document.getElementById('languageSelect').value;
-    const randomIndex = Math.floor(Math.random() * activities[languageCode].length);
-    const activity = activities[languageCode][randomIndex];
+    const message = habits[languageCode] || "Translation not available";
 
-    const activityText = `${activity.name}: ${activity.description}`;
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
 
-    // Call the speakText function to speak the generated activity
-    speakText(activityText);
-  }
+  // Function to speak the greeting message
+  function speakHabbit2() {
+    const habits = {
+        'en': "Enough Sleep, Exercise, Healthy Diet",
+        'hi': "पर्याप्त नींद, व्यायाम, स्वस्थ आहार",
+        'kn': "ಸಾಕಷ್ಟು ನಿದ್ರೆ, ವ್ಯಾಯಾಮ, ಆರೋಗ್ಯಕರ ಆಹಾರ",
+        'ta': "போதும் தூங்கவும், உடல்நலம் பயிற்சி செய்யவும், சுதந்திரமான உணவு சாப்பிடுக",
+        'es': "Suficiente sueño, Ejercicio, Dieta saludable",
+        'ar': "نوم كاف، ممارسة الرياضة، نظام غذائي صحي",
+        'fr': "Assez de sommeil, Exercice, Régime alimentaire sain"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = habits[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+  function speakHabbit3() {
+    const habits = {
+        'en': "Outing into the SUN! Vitamin D",
+        'hi': "सूरज में बाहर निकलो! विटामिन डी",
+        'kn': "ಸೂರ್ಯರಲ್ಲಿ ಹೊರಗೆ ಹೋಗುವುದು! ವಿಟಾಮಿನ್ ಡಿ",
+        'ta': "சூரியனில் வெளியே செல்லுங்கள்! வைட்டமின் டி",
+        'es': "¡Salida al SOL! Vitamina D",
+        'ar': "الخروج إلى الشمس! فيتامين د",
+        'fr': "Sortir au SOLEIL! Vitamine D"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = habits[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
+
+
+function speakHabbit4() {
+    const habits = {
+        'en': "Listen music! Transform your mood",
+        'hi': "संगीत सुनो! अपनी मूड को बदलो",
+        'kn': "ಸಂಗೀತವನ್ನು ಕೇಳಿ! ನಿಮ್ಮ ಮೂಡ್ ಅನ್ನು ಮಾರ್ಪಡಿಸಿ",
+        'ta': "இசையைக் கேளுங்கள்! உங்கள் உணர்வை மாற்றுங்கள்",
+        'es': "¡Escucha música! Transforma tu estado de ánimo",
+        'ar': "استمع للموسيقى! حول مزاجك",
+        'fr': "Écoutez de la musique! Transformez votre humeur"
+        // Add more translations for other languages as needed
+    };
+
+    const languageCode = document.getElementById('languageSelect').value;
+    const message = habits[languageCode] || "Translation not available";
+
+    // Call the speakText function to speak the generated message
+    speakText(message);
+}
 
   // Function to speak text
   function speakText(text) {
